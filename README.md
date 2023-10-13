@@ -1,15 +1,18 @@
 [![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-718a45dd9cf7e7f842a935f5ebbe5719a5e09af4491e668f4dbf3b35d5cca122.svg)](https://classroom.github.com/online_ide?assignment_repo_id=12374661&assignment_repo_type=AssignmentRepo)
-# YOUR PROJECT TITLE
+
+# IdleMC (Idle Minecraft)
 
 CIT 128 Student Directed Project
 
 ## Student Info
 
-Add your Name, CRN, and Semester Year here using unordered bullets in Markdown.
+* Devin Gomez
+* Fall 2023
+* 77567
 
 ## Program Description
 
-Describe your individual project program and include the goals of the program.
+The goal of IdleMC, a Minecraft idle game, is to build and expand your mining empire by mining, selling resources, and wise investments with minecoins.
 
 ### Video Demonstration
 
