@@ -114,3 +114,5 @@ venv.bak/
 # Large Files
 companies_large.json
 companies_medium.json
+
+data.json
