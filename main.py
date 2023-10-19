@@ -9,4 +9,5 @@ from player import Player
 user = Player()
 user.loadData()
 
+user.gatherMaterials()
 print(user.minecoins)

@@ -1,6 +1,10 @@
 # Used to serialize and decode json and used to detect if savefile exists
 import json
 import os
+import time
+
+# Used for mining and waiting for input at the same time
+import threading
 
 from exceptions import FileNotExistant
 
@@ -13,7 +17,30 @@ DataFileName = 'data.json'
 class Player:
     def __init__(self):
         self.minecoins = 0
+        
+        self.miningSpeed = 1
+        self.miningDelay = 1
+
         self.upgrades = []
+
+    def gatherMaterials(self):
+        loop = threadedGoMining(self)
+        thread = threading.Thread(target=loop.start)
+
+        try:
+            thread.start()
+
+            while True:
+                inp = input("!!! AT ANYTIME TYPE 'q' to stop mining !!!\n")
+                if inp.lower() == "q":
+                    loop.stop()
+                    break
+
+        except KeyboardInterrupt:
+            print("KeyboardInterrupt: Stopping the loop...")
+            loop.stop()
+
+        
     
     def saveData(self):
         if not os.path.exists(DataFileName):
@@ -32,3 +59,21 @@ class Player:
             setattr(self,key,value)
 
         
+
+
+'''
+This class is used in "Player" class for method gatherMaterials()
+'''
+class threadedGoMining:
+    def __init__(self, player):
+        self._stop = threading.Event()
+        self.player = player
+
+    def start(self):
+        time.sleep(0.1)
+        while not self._stop.is_set():
+            print("Looping...")
+            time.sleep(self.player.miningDelay)
+
+    def stop(self):
+        self._stop.set()
