@@ -14,3 +14,5 @@ game = IdleMC()
 user = Player()
 
 game.gatherMaterials(user)
+user.setMineCoins(1000)
+game.saveData(user)

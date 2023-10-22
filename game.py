@@ -22,11 +22,6 @@ saveFilename = 'data.json'
 # !!! Possible Feature Addition encrypt the data.json with md5 or some other hashing method 
 # !!! to prevent players from editing their save
 class IdleMC:
-    def __init__(self):
-        self.lastRecDate = ''
-        self.currentDate = ''
-
-
     def gatherMaterials(self, player):
         miner = threadedGoMining(player)
         thread = threading.Thread(target=miner.start, args=())
@@ -40,9 +35,12 @@ class IdleMC:
                 miner.stop()
                 break
 
+    # FIX THIS IT SHOULD SAVE ERVERYTHING NOT JUST VARAIBLES IN GAME.PY !!!
     def saveData(self):
         if not os.path.exists(saveFilename):
             open(saveFilename, 'a').close()
+
+        self.lastLogin = time.time()
         saveFile = open(saveFilename,'w', encoding="utf-8") 
         saveFile.write(json.dumps(self, default=vars))
 

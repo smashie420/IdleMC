@@ -1,4 +1,4 @@
-class Player:
+class Player():
     def __init__(self):
         self.minecoins = 0
         
@@ -6,7 +6,15 @@ class Player:
         self.miningDelay = 1
 
         self.upgrades = []
+        self.lastLogin = ''
 
-    def giveMineCoins(self,amount):
-        if amount <= 0: return
+
+
+    def getMineCoins(self):
+        return self.minecoins
+    def setMineCoins(self,amount):
+        if type(amount) != int:
+            raise ValueError
         self.minecoins += amount
+        
+        
