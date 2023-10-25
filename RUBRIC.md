@@ -37,6 +37,12 @@ The instructor provided rubric is worth 75 points **may not be modified** by the
 
 The student provided rubric is worth 25 points and is specific to the individual student directed project description. Students may decide how to divide up the points in consultation with the instructor who will complete a Pull Request with changes that you must successfully merge into your code. Specific goals with point allocations must be given in the rubric to be accepted or the instructor may choose to modify the rubric or points distribution at any time.
 
+* **Menu System (5pt)**
+    * Menu sucessfully displays all options (1pt)
+    * Menu system successfully executes given command (1pt) 
+    * Error Handling, if user input doesn't match menu, handle appropriately (3pt)
+    * 
+*  
 * Student Grading Description 1 (X pt)
 * Student Grading Description 2 (X pt)
 * Student Grading Description 3 (X pt)
