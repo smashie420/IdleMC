@@ -7,12 +7,12 @@
     CIT 128: Python Programming II
     Student Directed Project
 '''
-from player import Player
+#from player import Player
 from game import IdleMC
 
 game = IdleMC() 
-user = Player()
+#user = Player()
 
-game.gatherMaterials(user)
-user.setMineCoins(1000)
-game.saveData(user)
+game.gatherMaterials()
+#user.setMineCoins(1000)
+game.saveData()

@@ -12,6 +12,7 @@ import keyboard
 import threading
 
 # Imports from files i've created:
+from player import Player
 from exceptions import FileNotExistant
 from extras.colors import bcolors
 
@@ -22,8 +23,11 @@ saveFilename = 'data.json'
 # !!! Possible Feature Addition encrypt the data.json with md5 or some other hashing method 
 # !!! to prevent players from editing their save
 class IdleMC:
-    def gatherMaterials(self, player):
-        miner = threadedGoMining(player)
+    def __init__(self, player=Player()):
+        self.player = player
+
+    def gatherMaterials(self):
+        miner = threadedGoMining(self.player)
         thread = threading.Thread(target=miner.start, args=())
 
         print(f"{bcolors.WARNING}!!! AT ANYTIME PRESS 'q' to stop mining !!!{bcolors.ENDC}")
