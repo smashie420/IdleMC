@@ -23,8 +23,8 @@ saveFilename = 'data.json'
 # !!! Possible Feature Addition encrypt the data.json with md5 or some other hashing method 
 # !!! to prevent players from editing their save
 class IdleMC:
-    def __init__(self, player=Player()):
-        self.player = player
+    def __init__(self):
+        self.player = Player()
 
     def gatherMaterials(self):
         miner = threadedGoMining(self.player)
@@ -50,7 +50,10 @@ class IdleMC:
 
     def loadData(self):
         if not os.path.exists(saveFilename):
+            saveFile = open(saveFilename,'w', encoding="utf-8") 
+            saveFile.write(json.dumps(self, default=vars))
             raise FileNotExistant
+        
         saveFile = open(saveFilename,'r') 
 
         saveFileDecoded = json.load(saveFile)
@@ -70,9 +73,9 @@ class threadedGoMining:
         time.sleep(0.1)
         while not self._stop.is_set():
             rollDice = randint(0,1)
-            print(f"ROLLED: {rollDice}")
+            print(f"ROLLED: {rollDice}, DELAY: {self.player['miningDelay']}")
 
-            time.sleep(self.player.miningDelay)
+            time.sleep(self.player['miningDelay'])
             
 
     def stop(self):

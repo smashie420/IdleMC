@@ -11,8 +11,9 @@
 from game import IdleMC
 
 game = IdleMC() 
-#user = Player()
 
+game.loadData()
+print(game.player['minecoins'])
 game.gatherMaterials()
 #user.setMineCoins(1000)
 game.saveData()
