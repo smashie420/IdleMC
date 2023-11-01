@@ -13,6 +13,7 @@ import threading
 
 # Imports from files i've created:
 from player import Player
+from items import Items
 from exceptions import FileNotExistant
 from extras.colors import bcolors
 
@@ -32,6 +33,7 @@ class IdleMC:
 
         print(f"{bcolors.WARNING}!!! AT ANYTIME PRESS 'q' to stop mining !!!{bcolors.ENDC}")
         time.sleep(2)
+        os.system('cls')
         thread.start()
 
         while True:
@@ -73,7 +75,9 @@ class threadedGoMining:
         time.sleep(0.1)
         while not self._stop.is_set():
             rollDice = randint(0,1)
+            print(f"{bcolors.WARNING}!!! AT ANYTIME PRESS 'q' to stop mining !!!{bcolors.ENDC}")
             print(f"ROLLED: {rollDice}, DELAY: {self.player['miningDelay']}")
+            
 
             time.sleep(self.player['miningDelay'])
             
