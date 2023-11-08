@@ -60,8 +60,14 @@ class IdleMC:
 
         saveFileDecoded = json.load(saveFile)
 
-        for key, value in saveFileDecoded.items():
-            setattr(self,key,value)
+        loadedPlayer = Player()
+        for key, value in saveFileDecoded['player'].items():
+            #print(f"KEY: {key} VALUE: {value}")
+            setattr(loadedPlayer,key,value)
+            
+
+
+        self.player = loadedPlayer
 
 '''
 This class is used in "IdleMC" class for method gatherMaterials()
@@ -96,7 +102,7 @@ class threadedGoMining:
                     print(f"{bcolors.BOLD} {resources['name']} gathered x{resources['quantity']} {bcolors.ENDC}")
                 else:
                     print(f"{resources['name']} gathered x{resources['quantity']}")
-            time.sleep(self.player['miningDelay'])
+            time.sleep(self.player.miningDelay)
 
     def stop(self):
         self._stop.set()
@@ -104,3 +110,6 @@ class threadedGoMining:
         print(f"\n\n{bcolors.OKGREEN}Total Resources Gathered:{bcolors.ENDC}")
         for resources in self.resourcesGathered:
             print(f"{resources['name']} gathered x{resources['quantity']}")
+        self.player.appendInventory(self.resourcesGathered)
+
+        print(f'game.py: self.player.inventory = {self.player.inventory}')
