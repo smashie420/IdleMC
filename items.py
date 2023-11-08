@@ -4,7 +4,7 @@ class Items:
             0: {
                 "name": "Dirt",
                 "worth": 1,
-                "weight": 50
+                "weight": 100
             },
             1: {
                 "name": "Cobblestone",

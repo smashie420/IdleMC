@@ -9,14 +9,14 @@
 '''
 #from player import Player
 from game import IdleMC
-from items import Items
 
-items = Items()
-print(items.getWorth('Diamond'))
+#from items import Items
+#items = Items()
+#print(items.getWeights())
 
-#game = IdleMC() 
-#
-#game.loadData()
-#
-#game.gatherMaterials()
-#game.saveData()
+game = IdleMC() 
+
+game.loadData()
+
+game.gatherMaterials()
+game.saveData()

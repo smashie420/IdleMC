@@ -3,10 +3,13 @@ class Player():
         self.minecoins = 0
         
         self.miningSpeed = 1
-        self.miningDelay = 1
+        self.miningDelay = 2
 
         self.upgrades = []
-        self.lastLogin = ''
+        self.inventory = []
+
+
+        self.lastLogin = '0'
 
 
 

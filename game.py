@@ -5,7 +5,7 @@ import os
 # Used for sleeping (gatherMaterials)
 import time
 # Used for random rolls (gatherMaterials)
-from random import randint
+from random import randint, choices
 # Used to detect if a key is pressed (gatherMaterials)
 import keyboard
 # Used for mining
@@ -70,18 +70,37 @@ class threadedGoMining:
     def __init__(self, player):
         self._stop = threading.Event()
         self.player = player
+        self.items = Items()
+        self.resourcesGathered = []
 
     def start(self):
-        time.sleep(0.1)
-        while not self._stop.is_set():
-            rollDice = randint(0,1)
-            print(f"{bcolors.WARNING}!!! AT ANYTIME PRESS 'q' to stop mining !!!{bcolors.ENDC}")
-            print(f"ROLLED: {rollDice}, DELAY: {self.player['miningDelay']}")
-            
+        for i in range(0, len(self.items.blocks)): # Populate the list with all the blocks
+            self.resourcesGathered.append({'name': self.items.blocks[i]['name'], 'quantity':0})
 
+        
+
+        while not self._stop.is_set():
+            os.system('cls')
+            print(f"{bcolors.WARNING}!!! AT ANYTIME PRESS 'q' to stop mining !!!{bcolors.ENDC}")
+
+            randomResourceGathered = choices(self.items.blocks, self.items.getWeights())[0]['name'] # Choose a random block with its chance being its weight (higher = more likely to get)
+
+            for item in self.resourcesGathered:
+                if item['name'] == randomResourceGathered:
+                    item['quantity'] += 1
+
+            # This is used to print every gathered
+            for resources in self.resourcesGathered:
+                if resources['name'] == randomResourceGathered: # To have colored text
+
+                    print(f"{bcolors.BOLD} {resources['name']} gathered x{resources['quantity']} {bcolors.ENDC}")
+                else:
+                    print(f"{resources['name']} gathered x{resources['quantity']}")
             time.sleep(self.player['miningDelay'])
-            
 
     def stop(self):
         self._stop.set()
 
+        print(f"\n\n{bcolors.OKGREEN}Total Resources Gathered:{bcolors.ENDC}")
+        for resources in self.resourcesGathered:
+            print(f"{resources['name']} gathered x{resources['quantity']}")
