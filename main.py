@@ -18,6 +18,8 @@ game = IdleMC()
 
 
 game.loadData() # This changes the class from a class 'player.Player' class to a class 'dict'
-print(game.player.getMineCoins())
 game.gatherMaterials()
+
+print("\n\n INVENTORY: ")
+game.player.print_inventory()
 game.saveData()

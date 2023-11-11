@@ -37,7 +37,7 @@ class IdleMC:
         thread.start()
 
         while True:
-            if keyboard.read_key('q'):
+            if keyboard.is_pressed('q'):
                 miner.stop()
                 break
 
@@ -80,7 +80,7 @@ class threadedGoMining:
         self.resourcesGathered = []
 
     def start(self):
-        for i in range(0, len(self.items.blocks)): # Populate the list with all the blocks
+        for i in range(0, len(self.items.blocks)): # Populate the list with all the blocks, needed for making sure the indexes matches with the platers inventory
             self.resourcesGathered.append({'name': self.items.blocks[i]['name'], 'quantity':0})
 
         
@@ -102,6 +102,7 @@ class threadedGoMining:
                     print(f"{bcolors.BOLD} {resources['name']} gathered x{resources['quantity']} {bcolors.ENDC}")
                 else:
                     print(f"{resources['name']} gathered x{resources['quantity']}")
+            print(self.player.miningDelay)
             time.sleep(self.player.miningDelay)
 
     def stop(self):
@@ -112,4 +113,4 @@ class threadedGoMining:
             print(f"{resources['name']} gathered x{resources['quantity']}")
         self.player.appendInventory(self.resourcesGathered)
 
-        print(f'game.py: self.player.inventory = {self.player.inventory}')
+        #print(f'game.py: self.player.inventory = {self.player.inventory}')

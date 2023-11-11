@@ -4,16 +4,13 @@ class Player:
     def __init__(self):
         self.minecoins = 0
         self.miningSpeed = 1
-        self.miningDelay = 2
+        self.miningDelay = 0.1
 
 
         self.upgrades = []
         self.inventory = []
 
         self.lastLogin = '0'
-
-        #for i in range(0, len(Items().blocks)): # Populate the list with all the blocks
-        #    self.inventory.append({'name': Items().blocks[i]['name'], 'quantity':0})
 
 
 
@@ -24,10 +21,25 @@ class Player:
             raise ValueError
         self.minecoins += amount
     def appendInventory(self, item):
-        #item = 
-        #self.inventory.append(item)
+        '''
+            Appends an array of items (blocks) into the players inventory
 
-        # THERE IS TWO ARRAYS BECAUSE OF THE SAVE FILE
-        print("HI")
+        Args:
+            item (array): 
+            
+        Returns:
+            void: returns nothing    
+        '''
+        for i in range(0,len(self.inventory)):
+            if item[i]['name'] == self.inventory[i]['name']: # IF
+                self.inventory[i]['quantity'] += item[i]['quantity']
+
+        #print(f'player.py:\n        AFTER appendInventory(item): {item}')
+        #print(f'player.py:\n        AFTER Self Inventory: {self.inventory}')
+
+    def print_inventory(self):
+        for block in self.inventory:
+            print(f"{block['name']} x{block['quantity']}")
+
         
         
