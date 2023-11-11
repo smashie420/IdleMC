@@ -57,7 +57,7 @@ class IdleMC:
 
             for i in range(0, len(Items().blocks)): # Populate the list with all the blocks, needed for making sure the indexes matches with the platers inventory
                 self.player.inventory.append({'name': Items().blocks[i]['name'], 'quantity':0})
-                
+
             saveFile.write(json.dumps(self, default=vars))
 
 
@@ -109,7 +109,6 @@ class threadedGoMining:
                     print(f"{bcolors.BOLD} {resources['name']} gathered x{resources['quantity']} {bcolors.ENDC}")
                 else:
                     print(f"{resources['name']} gathered x{resources['quantity']}")
-            print(self.player.miningDelay)
             time.sleep(self.player.miningDelay)
 
     def stop(self):
