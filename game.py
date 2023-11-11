@@ -53,7 +53,14 @@ class IdleMC:
     def loadData(self):
         if not os.path.exists(saveFilename):
             saveFile = open(saveFilename,'w', encoding="utf-8") 
+
+
+            for i in range(0, len(Items().blocks)): # Populate the list with all the blocks, needed for making sure the indexes matches with the platers inventory
+                self.player.inventory.append({'name': Items().blocks[i]['name'], 'quantity':0})
+                
             saveFile.write(json.dumps(self, default=vars))
+
+
             raise FileNotExistant
         
         saveFile = open(saveFilename,'r') 
@@ -111,6 +118,6 @@ class threadedGoMining:
         print(f"\n\n{bcolors.OKGREEN}Total Resources Gathered:{bcolors.ENDC}")
         for resources in self.resourcesGathered:
             print(f"{resources['name']} gathered x{resources['quantity']}")
+        time.sleep(1)
         self.player.appendInventory(self.resourcesGathered)
-
         #print(f'game.py: self.player.inventory = {self.player.inventory}')

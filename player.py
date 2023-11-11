@@ -4,7 +4,7 @@ class Player:
     def __init__(self):
         self.minecoins = 0
         self.miningSpeed = 1
-        self.miningDelay = 0.1
+        self.miningDelay = 1
 
 
         self.upgrades = []
