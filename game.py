@@ -41,6 +41,20 @@ class IdleMC:
                 miner.stop()
                 break
 
+    def blankInventory():
+        '''
+        Will get every block inside of items.py and format them AKA a blank inventory
+
+        Returns:
+            [{'name': 'Dirt', 'quantity': 0}, {'name': 'Cobblestone', 'quantity': 0}, ... {'name': 'Diamond', 'quantity': 0}]
+        
+        '''
+        result = []
+        for i in range(0, len(Items().blocks)):
+            result.append({'name': Items().blocks[i]['name'], 'quantity':0})
+        return result
+
+
     # FIX THIS IT SHOULD SAVE ERVERYTHING NOT JUST VARAIBLES IN GAME.PY !!!
     def saveData(self):
         if not os.path.exists(saveFilename):
@@ -51,17 +65,18 @@ class IdleMC:
         saveFile.write(json.dumps(self, default=vars))
 
     def loadData(self):
-        if not os.path.exists(saveFilename):
+        if not os.path.exists(saveFilename): # If file doesnt exist then create new one
             saveFile = open(saveFilename,'w', encoding="utf-8") 
 
 
-            for i in range(0, len(Items().blocks)): # Populate the list with all the blocks, needed for making sure the indexes matches with the platers inventory
-                self.player.inventory.append({'name': Items().blocks[i]['name'], 'quantity':0})
+            #for i in range(0, len(Items().blocks)): # Populate the list with all the blocks, needed for making sure the indexes matches with the platers inventory
+            #    self.player.inventory.append({'name': Items().blocks[i]['name'], 'quantity':0})
+            self.player.inventory = IdleMC.blankInventory()
 
             saveFile.write(json.dumps(self, default=vars))
 
 
-            raise FileNotExistant
+            #raise FileNotExistant
         
         saveFile = open(saveFilename,'r') 
 
@@ -69,7 +84,6 @@ class IdleMC:
 
         loadedPlayer = Player()
         for key, value in saveFileDecoded['player'].items():
-            #print(f"KEY: {key} VALUE: {value}")
             setattr(loadedPlayer,key,value)
             
 
@@ -87,10 +101,12 @@ class threadedGoMining:
         self.resourcesGathered = []
 
     def start(self):
-        for i in range(0, len(self.items.blocks)): # Populate the list with all the blocks, needed for making sure the indexes matches with the platers inventory
-            self.resourcesGathered.append({'name': self.items.blocks[i]['name'], 'quantity':0})
 
-        
+        self.resourcesGathered = IdleMC.blankInventory() # Returns a blank slate of blocks
+
+        #for i in range(0, len(self.items.blocks)): # Populate the list with all the blocks, needed for making sure the indexes matches with the platers inventory
+        #    self.resourcesGathered.append({'name': self.items.blocks[i]['name'], 'quantity':0})
+        #print(self.resourcesGathered)
 
         while not self._stop.is_set():
             os.system('cls')
@@ -109,7 +125,7 @@ class threadedGoMining:
                     print(f"{bcolors.BOLD} {resources['name']} gathered x{resources['quantity']} {bcolors.ENDC}")
                 else:
                     print(f"{resources['name']} gathered x{resources['quantity']}")
-            time.sleep(self.player.miningDelay)
+            time.sleep(self.player.miningSpeed)
 
     def stop(self):
         self._stop.set()
@@ -119,4 +135,3 @@ class threadedGoMining:
             print(f"{resources['name']} gathered x{resources['quantity']}")
         time.sleep(1)
         self.player.appendInventory(self.resourcesGathered)
-        #print(f'game.py: self.player.inventory = {self.player.inventory}')

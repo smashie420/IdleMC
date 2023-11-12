@@ -3,16 +3,15 @@ from items import Items
 class Player:
     def __init__(self):
         self.minecoins = 0
-        self.miningSpeed = 1
-        self.miningDelay = 1
 
+        self.miningLvl = 1
+        self.miningDelay = 1
+        self.miningSpeed = self.miningDelay / self.miningLvl
 
         self.upgrades = []
         self.inventory = []
 
         self.lastLogin = '0'
-
-
 
     def getMineCoins(self):
         return self.minecoins
@@ -31,7 +30,7 @@ class Player:
             void: returns nothing    
         '''
         for i in range(0,len(self.inventory)):
-            if item[i]['name'] == self.inventory[i]['name']: # IF
+            if item[i]['name'] == self.inventory[i]['name']:
                 self.inventory[i]['quantity'] += item[i]['quantity']
 
         #print(f'player.py:\n        AFTER appendInventory(item): {item}')
