@@ -49,11 +49,7 @@ The student provided rubric is worth 25 points and is specific to the individual
    - The user can earn in-game currency by selling resources. (1pt)
    - The user can spend the in-game currency to upgrade their character and tools. (1pt)
    - The game includes a sense of progression, where the user can unlock new tools and upgrades as they progress. (1pt)
-
-* **REMOVE this is covered by instructor rubric: Documentation (9 points)**
-   - The code includes clear and concise comments explaining the purpose and functionality of different sections of code.
-   - The README file also includes a clear description of the game, its mechanics, and its objectives.
-
+  
 Total Points: 100
 
 ## Additional Grading Notes
