@@ -1,3 +1,6 @@
+from exceptions import BlockNotExistant
+
+
 class Items:
     def __init__(self):
         self.blocks = {
@@ -55,6 +58,7 @@ class Items:
         for i in range(len(self.blocks)):
             if block_name == self.blocks[i]['name']:
                 return self.blocks[i]['worth']
-        # Returns -1 if not found
-        return -1
+        # Returns raise exception
+        raise BlockNotExistant()
+
 

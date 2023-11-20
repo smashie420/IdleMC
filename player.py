@@ -18,6 +18,10 @@ class Player:
     def setMineCoins(self,amount):
         if type(amount) != int:
             raise ValueError
+        self.minecoins = amount
+    def addMineCoins(self, amount):
+        if type(amount) != int:
+            raise ValueError
         self.minecoins += amount
     def appendInventory(self, item):
         '''
@@ -36,9 +40,32 @@ class Player:
         #print(f'player.py:\n        AFTER appendInventory(item): {item}')
         #print(f'player.py:\n        AFTER Self Inventory: {self.inventory}')
 
+    def removeBlockFromInventory(self, block_name, quantity):
+        '''
+            Appends an array of items (blocks) into the players inventory
+
+        Args:
+            block_name (str): the blocks name 
+            quantity (int): the amount to remove
+            
+        Returns:
+            void: returns nothing
+        '''
+        for i in range(0,len(self.inventory)):
+            if self.inventory[i]['name'] == block_name:
+                    self.inventory[i]['quantity'] -= quantity
+                
+    #def getInventory(self):
+    #    return self.inventory
+    
+    def getOnhandBlock(self, block_name):
+        ''' 
+        Gets the quantity of the block given
+        '''
+        for block in self.inventory: # Searches the array for the block we're looking for
+            if block['name'] == block_name:
+                return block['quantity']
+
     def print_inventory(self):
         for block in self.inventory:
-            print(f"{block['name']} x{block['quantity']}")
-
-        
-        
+            print(f" {block['name']} x{block['quantity']}")
