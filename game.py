@@ -121,6 +121,8 @@ class threadedGoMining:
                     print(f"{bcolors.BOLD} {resources['name']} gathered x{resources['quantity']} {bcolors.ENDC}")
                 else:
                     print(f"{resources['name']} gathered x{resources['quantity']}")
+                
+
             time.sleep(self.player.miningSpeed)
 
     def stop(self):
@@ -129,5 +131,6 @@ class threadedGoMining:
         print(f"\n\n{bcolors.OKGREEN}Total Resources Gathered:{bcolors.ENDC}")
         for resources in self.resourcesGathered:
             print(f"{resources['name']} gathered x{resources['quantity']}")
+        print("\n")
         time.sleep(1)
         self.player.appendInventory(self.resourcesGathered)
