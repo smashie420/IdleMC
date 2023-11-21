@@ -37,18 +37,19 @@ The instructor provided rubric is worth 75 points **may not be modified** by the
 
 The student provided rubric is worth 25 points and is specific to the individual student directed project description. Students may decide how to divide up the points in consultation with the instructor who will complete a Pull Request with changes that you must successfully merge into your code. Specific goals with point allocations must be given in the rubric to be accepted or the instructor may choose to modify the rubric or points distribution at any time.
 
-* **Menu System (5pt)**
-    - Menu sucessfully displays all options (1pt)
-    - Menu system successfully executes given command (1pt) 
-    - Error Handling, if user input doesn't match menu, handle appropriately (3pt)
-* **Code Organization (6 points)**
-   - Code is well-organized. (3pt)
-   - Code is divided into appropriate modules or classes. (3pt)
-* **Game Mechanics (5 points)**
+* **Menu System (8pt)**
+    - Menu has creativity into it ;) (2pt)
+    - Menu sucessfully displays all options (2pt)
+    - Menu system successfully executes given command (2pt)
+    - Error Handling, if user input doesn't match menu, handle appropriately (2pt)
+* **Code Organization (9 points)**
+   - Code is well-organized. (4.5pt)
+   - Code is divided into appropriate modules or classes. (4.5pt)
+* **Game Mechanics (8 points)**
    - The game includes resource gathering mechanics. (2pt)
-   - The user can earn in-game currency by selling resources. (1pt)
-   - The user can spend the in-game currency to upgrade their character and tools. (1pt)
-   - The game includes a sense of progression, where the user can unlock new tools and upgrades as they progress. (1pt)
+   - The user can earn in-game currency by selling resources. (2pt)
+   - The user can spend the in-game currency to upgrade their character and tools. (2pt)
+   - The game includes a sense of progression, where the user can unlock upgrades as they progress. (2pt)
   
 Total Points: 100
 
