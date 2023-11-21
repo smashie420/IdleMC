@@ -60,7 +60,7 @@ class Player:
     
     def getOnhandBlock(self, block_name):
         ''' 
-        Gets the quantity of the block given
+        Gets the quantity of the block from a players inventory
         '''
         for block in self.inventory: # Searches the array for the block we're looking for
             if block['name'] == block_name:
