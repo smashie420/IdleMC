@@ -15,6 +15,7 @@
 from game import IdleMC
 import keyboard
 import time
+import os
 game = IdleMC() 
 
 
@@ -71,6 +72,7 @@ def sellResources(): # UNFINISHED!
 
 if __name__ == '__main__':
     while(True):
+        os.system('cls')
         print_logo()
         print_options()
         event = keyboard.read_event(suppress=True)
