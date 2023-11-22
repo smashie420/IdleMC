@@ -2,6 +2,7 @@
 import json
 import os
 
+
 # Used for sleeping (gatherMaterials)
 import time
 # Used for random rolls (gatherMaterials)
@@ -14,6 +15,7 @@ import threading
 # Imports from files i've created:
 from player import Player
 from items import Items
+from shop import Shop
 from exceptions import FileNotExistant
 from extras.colors import bcolors
 
@@ -26,6 +28,7 @@ saveFilename = 'data.json'
 class IdleMC:
     def __init__(self):
         self.player = Player()
+        self.shop = Shop(self.player)
 
     def blankInventory():
         '''
@@ -78,7 +81,7 @@ class IdleMC:
             if keyboard.is_pressed('q'):
                 miner.stop()
                 break
-    
+    '''
     def sellResource(self, resource):
         items = Items()
         resourceCost = items.getWorth(resource)
@@ -91,6 +94,7 @@ class IdleMC:
 
         # Add Money
         self.player.addMineCoins(resourceCost * playerHas) 
+    '''
 
 def print_miner(frame):
         if frame == 0:

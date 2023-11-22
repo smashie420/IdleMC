@@ -40,7 +40,10 @@ class Player:
         #print(f'player.py:\n        AFTER appendInventory(item): {item}')
         #print(f'player.py:\n        AFTER Self Inventory: {self.inventory}')
 
-    def removeBlockFromInventory(self, block_name, quantity):
+    def getInventory(self):
+        return self.inventory
+    
+    def removeBlockFromInventory(self, block_name, quantity=1):
         '''
             Appends an array of items (blocks) into the players inventory
 

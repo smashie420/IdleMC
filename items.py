@@ -60,5 +60,3 @@ class Items:
                 return self.blocks[i]['worth']
         # Returns raise exception
         raise BlockNotExistant()
-
-
