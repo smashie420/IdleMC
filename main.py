@@ -82,6 +82,25 @@ def print_shop_logo():
         '           %+==%# :@   *%  ##=#@- =%               \n',
     )
 
+def print_inventory_logo():
+    print(
+        '                #########################%%               \n',
+        '               #+=========++++==========*%               \n',
+        '               #*++==+++++*****++++++++=*%               \n',
+        '               #*++++++=++-  .+#*+++++++#%               \n',
+        '               ##%%%%%%%%%= .-*%%%%%%%%%%@               \n',
+        '               #*+++++++++=:-=**++++++++#%               \n',
+        '               #*+++++++++=:-=++++++++++#%               \n',
+        '               #*======+===+++++========#%               \n',
+        '               #*=========++++=========+#%               \n',
+        '               #*======================+#%               \n',
+        '               #*========+=+++===+====++#%               \n',
+        '               #*=====+++===========++++#%               \n',
+        '               #*=======================#%               \n',
+        '               #*+++++++++++++++++++++++#%               \n',
+        '               *************************##               \n',
+    )
+
 def print_options():
     for key in option_menu.keys():
         print(key , '---' , option_menu[key])
@@ -144,8 +163,17 @@ def sellResources(): # UNFINISHED!
 
     if confirmSell:
         game.shop.sellResource(blocksIndexed[blockIndex]["name"], quantityToSell)
-
     time.sleep(5)
+
+def inventory():
+    os.system('cls')
+    print_inventory_logo()
+    game.player.print_inventory()
+
+    print(f"{bcolors.WARNING}Press Q to go back to main menu{bcolors.ENDC}")
+    while True:
+        if keyboard.is_pressed('q'):
+            break
 
 
 if __name__ == '__main__':
@@ -154,10 +182,12 @@ if __name__ == '__main__':
         print_game_logo()
         print_options()
         event = keyboard.read_event(suppress=True)
-        if (event.event_type == keyboard.KEY_DOWN) and event.name == 'm':
+        if (event.event_type == keyboard.KEY_DOWN) and event.name == 'w':
             goMining()
-        if (event.event_type == keyboard.KEY_DOWN) and event.name == 's':
+        if (event.event_type == keyboard.KEY_DOWN) and event.name == 'e':
             sellResources()
+        if (event.event_type == keyboard.KEY_DOWN) and event.name == 'r':
+            inventory()
         if (event.event_type == keyboard.KEY_DOWN) and event.name == 'q':
             print("Quitting.")
             break

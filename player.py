@@ -1,4 +1,5 @@
 from items import Items
+from extras.colors import bcolors
 
 class Player:
     def __init__(self):
@@ -70,5 +71,6 @@ class Player:
                 return block['quantity']
 
     def print_inventory(self):
+        print(f"{bcolors.OKCYAN}Inventory{bcolors.ENDC}")
         for block in self.inventory:
             print(f" {block['name']} x{block['quantity']}")
