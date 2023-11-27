@@ -9,7 +9,7 @@
 '''
 #from player import Player
 
-#from items import Items
+from items import Items
 #items = Items()
 #print(items.getWorth("Diamond"))
 from game import IdleMC
@@ -37,6 +37,7 @@ game.initilizeShop() # Once data loads, update the shop to have the current play
 option_menu = {
 	'w': 'Go Mining' , 
 	'e': 'Sell Resources',
+    't': 'Buy Upgrades/Tools',
 	'r': 'Inventory' ,
     'a': 'Stats',
 	'q': 'Quit' ,
@@ -103,6 +104,29 @@ def print_inventory_logo():
         '               *************************##               \n',
     )
 
+def print_stats_logo():
+    print(
+        "                  @@@@@@@@@@        \n"
+        "                   @@@@@@@@         \n"
+        "               @@@@@@@@@@           \n"
+        "            @@@@@@   @@@   @@@@@@   \n"
+        "           @@@@            @@@@@@   \n"
+        "@@@@@@    @@@@             @@@@@@   \n"
+        "   @@@@@@@@@@      @@@@@@  @@@@@@   \n"
+        "       @@@@        @@@@@@@ @@@@@@   \n"
+        "                   @@@@@@@ @@@@@@   \n"
+        "   @@@@@@          @@@@@@@ @@@@@@   \n"
+        "   @@@@@@          @@@@@@@ @@@@@@   \n"
+        "   @@@@@@  @@@@@@  @@@@@@@ @@@@@@   \n"
+        "   @@@@@@  @@@@@@  @@@@@@@ @@@@@@   \n"
+        "   @@@@@@  @@@@@@  @@@@@@@ @@@@@@   \n"
+        "   @@@@@@  @@@@@@  @@@@@@@ @@@@@@   \n"
+        "   @@@@@@  @@@@@@  @@@@@@  @@@@@@   \n"
+        "                                    \n"
+        "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n"
+        "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n"
+    )
+
 def print_options():
     for key in option_menu.keys():
         print(key , '---' , option_menu[key])
@@ -163,7 +187,7 @@ def sellResources(): # UNFINISHED!
 
     if confirmSell:
         game.shop.sellResource(blocksIndexed[blockIndex]["name"], quantityToSell)
-    time.sleep(5)
+    time.sleep(2.5)
 
 def inventory():
     try:
@@ -187,6 +211,59 @@ def inventory():
     except KeyboardInterrupt:
         return
 
+def stats():
+    os.system('cls')
+
+    print_stats_logo()
+    print(f"{bcolors.HEADER}Stats:{bcolors.ENDC}")
+    print(f"    {bcolors.HEADER}Player Stats:{bcolors.ENDC}")
+    print(f'        Minecoins:    {game.player.minecoins}')
+    print(f'        Mining Speed: {game.player.miningSpeed}')
+    print(f'        Mining Level: {game.player.miningLvl}')
+    print(f"    {bcolors.HEADER}Upgrades:{bcolors.ENDC}")
+    for upgrade in game.player.upgrades:
+        print(f'        {upgrade["name"]}')
+        print(f'            Mining Speed: {upgrade["miningSpeed"]}')
+    print(f"{bcolors.WARNING}Press Q to go back to main menu{bcolors.ENDC}")
+    try:
+        while True:
+            event = keyboard.read_event(suppress=True)
+            if (event.event_type == keyboard.KEY_DOWN) and event.name == 'q':
+                break
+    except KeyboardInterrupt:
+        return
+    
+def shop():
+    os.system('cls')
+
+    allTools = Items().items
+
+    for i in allTools:
+        print(f"{i} --- {allTools[i]['name']} --- ${allTools[i]['price']}")
+
+    toolToBuy = int(input(f"What do you want to buy? (0-{len(allTools)-1}) "))
+    if toolToBuy > len(allTools)-1:
+        print(f'{bcolors.WARNING}OUT OF RANGE!{bcolors.ENDC}')
+        time.sleep(1)
+        sellResources()
+        return
+    if toolToBuy > len(allTools)-1:
+        print(f'{bcolors.WARNING}OUT OF RANGE!{bcolors.ENDC}')
+        time.sleep(1)
+        sellResources()
+        return
+    
+    confirmation = input(f"Are you sure you want to buy a {allTools[toolToBuy]['name']}? (y/n) ")
+    if confirmation == 'y' or confirmation == 'yes':
+        confirmation = True
+    else:
+        confirmation = False
+    
+    if confirmation:
+        game.shop.buyTool(allTools[toolToBuy]['name'])
+    
+    return
+
 
 if __name__ == '__main__':
     while(True):
@@ -198,10 +275,12 @@ if __name__ == '__main__':
             goMining()
         if (event.event_type == keyboard.KEY_DOWN) and event.name == 'e':
             sellResources()
+        if (event.event_type == keyboard.KEY_DOWN) and event.name == 't':
+            shop()
         if (event.event_type == keyboard.KEY_DOWN) and event.name == 'r':
             inventory()
-        #if (event.event_type == keyboard.KEY_DOWN) and event.name == 'a':
-        #    stats()
+        if (event.event_type == keyboard.KEY_DOWN) and event.name == 'a':
+            stats()
         if (event.event_type == keyboard.KEY_DOWN) and event.name == 'q':
             print("Quitting.")
             break

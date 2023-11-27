@@ -12,7 +12,7 @@ class Player:
         self.upgrades = []
         self.inventory = []
 
-        self.lastLogin = '0'
+        self.lastLogin = 0
 
     def getMineCoins(self):
         return self.minecoins
@@ -24,6 +24,10 @@ class Player:
         if type(amount) != int:
             raise ValueError
         self.minecoins += amount
+    def subtractMineCoins(self, amount):
+        if type(amount) != int:
+            raise ValueError
+        self.minecoins -= amount
     def appendInventory(self, item):
         '''
             Appends an array of items (blocks) into the players inventory
@@ -74,3 +78,16 @@ class Player:
         print(f"{bcolors.OKCYAN}Inventory{bcolors.ENDC}")
         for block in self.inventory:
             print(f" {block['name']} x{block['quantity']}")
+
+    def checkIfHasUpgrade(self, upgrade_name):
+        '''
+        Checks if player already has an upgrade by searching by its name
+
+        Returns:
+            bool
+        '''
+
+        for i in range(0,len(self.upgrades)):
+            if self.upgrades[i]['name'] == upgrade_name:
+                return True
+        return False

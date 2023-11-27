@@ -184,8 +184,11 @@ class threadedGoMining:
                 else:
                     print(f"{resources['name']} gathered x{resources['quantity']}")
                 
-
-            time.sleep(self.player.miningSpeed)
+            if len(self.player.upgrades) > 0:
+                # Gets the best tool and uses that miningSpeed * playersMining Speed
+                time.sleep(self.player.miningSpeed * self.player.upgrades[len(self.player.upgrades)-1]['miningSpeed'])
+            else:
+                time.sleep(self.player.miningSpeed)
             frame += 1
 
     def stop(self):
