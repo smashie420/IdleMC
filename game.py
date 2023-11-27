@@ -28,6 +28,9 @@ saveFilename = 'data.json'
 class IdleMC:
     def __init__(self):
         self.player = Player()
+        
+
+    def initilizeShop(self):
         self.shop = Shop(self.player)
 
     def blankInventory():
@@ -78,9 +81,13 @@ class IdleMC:
         thread.start()
 
         while True:
-            if keyboard.is_pressed('q'):
+            event = keyboard.read_event(suppress=True)
+            if (event.event_type == keyboard.KEY_DOWN) and event.name == 'q':
                 miner.stop()
                 break
+            #if keyboard.is_pressed('q'):
+            #    miner.stop()
+            #    break
     '''
     def sellResource(self, resource):
         items = Items()

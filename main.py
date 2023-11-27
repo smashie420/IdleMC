@@ -20,6 +20,8 @@ import os
 
 game = IdleMC() 
 game.loadData() # This changes the class from a class 'player.Player' class to a class 'dict'
+game.initilizeShop() # Once data loads, update the shop to have the current player data
+
 #game.gatherMaterials()
 #print("\n\nINVENTORY: ")
 #game.player.print_inventory()
@@ -111,8 +113,8 @@ def goMining():
 
 def sellResources(): # UNFINISHED!
     os.system('cls')
-
     print_shop_logo()
+
     # This block of code is for printing 0 blockname x quantity \n ... etc
     blocksIndexed = {}
     playersInventory = game.player.getInventory()
@@ -122,9 +124,7 @@ def sellResources(): # UNFINISHED!
         index += 1
     for key in blocksIndexed.keys():
         print(f'{key} --- {blocksIndexed[key]["name"]} x{blocksIndexed[key]["quantity"]}')
-
-        # Check to detect if this is the last item in the array, if so print a newline
-        if index-1 == key:
+        if index-1 == key: # This is used to detect if this is the last item in the array, if so print a newline
             print("")
 
 
@@ -166,14 +166,26 @@ def sellResources(): # UNFINISHED!
     time.sleep(5)
 
 def inventory():
-    os.system('cls')
-    print_inventory_logo()
-    game.player.print_inventory()
+    try:
+        os.system('cls')
+        print_inventory_logo()
+        game.player.print_inventory()
 
-    print(f"{bcolors.WARNING}Press Q to go back to main menu{bcolors.ENDC}")
-    while True:
-        if keyboard.is_pressed('q'):
-            break
+        print(f"{bcolors.WARNING}Press Q to go back to main menu{bcolors.ENDC}")
+        while True:
+            event = keyboard.read_event(suppress=True)
+            if (event.event_type == keyboard.KEY_DOWN) and event.name == 'q':
+                break
+
+            '''
+            if keyboard.is_pressed('q'):
+                break
+            THIS IS A BAD WAY TO CHECK IF KEY PRESSED
+            WHY?
+                It doesnt erase whatever you typed, which isnt great
+            '''
+    except KeyboardInterrupt:
+        return
 
 
 if __name__ == '__main__':
@@ -188,6 +200,8 @@ if __name__ == '__main__':
             sellResources()
         if (event.event_type == keyboard.KEY_DOWN) and event.name == 'r':
             inventory()
+        #if (event.event_type == keyboard.KEY_DOWN) and event.name == 'a':
+        #    stats()
         if (event.event_type == keyboard.KEY_DOWN) and event.name == 'q':
             print("Quitting.")
             break
