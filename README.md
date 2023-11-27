@@ -21,6 +21,14 @@ CIT 128 Student Directed Project
 The goal of IdleMC, a Minecraft idle game, is to build and expand your mining empire by mining, selling resources, and wise investments with minecoins.
 
 ### Video Demonstration
+<div align="center">
+  <p>
+    <a href="http://www.youtube.com/watch?feature=player_embedded&v=B7QvgdkoEsc
+" target="_blank"><img src="http://img.youtube.com/vi/B7QvgdkoEsc/0.jpg" 
+alt="IMAGE ALT TEXT HERE" width="720" height="540" border="10" /></a>
+  </p>
+</div>
+
 
 Add a Clickable Link to your video demonstration here using markdown.
 
