@@ -41,7 +41,14 @@ pip install keyboard
 
 ## Software Engineering
 
-Describe the software engineering concepts used for the planning, design & development of this program. These can include an requirements gathering, use cases, other completed project planning or more. This does not mean you are describing how you will program the code, this is about your planning process used in engineering software.
+In the early stages of my project, I struggled with the decision of how to present my game to users. Whether to go for a 3D or 2D game. Considering the tight two-month timeframe and my skepticism about learning Pygame quick enough, I opted for a terminal-based game. I chose a terminal-based game because it's easier to make within my tight deadline, and it makes the development process simpler.
+
+To refine the user experience, I looked closely at how people can type things into the game. Python's native input() didn't suit well for my use case; it was too tedious to type a menu option and then press enter. Research led me to the keyboard library, offering a solution that allowed users to input without the enter key, ultimately solidifying my decision to stick with a terminal game.
+
+Beyond input considerations, I worked on organizing how my code should be put together using a method called object-oriented programming. The goal was to keep the codebase organized and neat, adhering to OOP principles for a well-structured design.
+
+Simply put, I tried to make my plan practical and flexible. I wanted the game to be fun for users, but I had to deal with the limits of time and learning new things. So, I adjusted and improved my project as I went along, making it work smoothly in the two months I had.
+
 
 ## Testing Script
 
