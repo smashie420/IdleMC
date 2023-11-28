@@ -12,6 +12,13 @@ class Shop:
         self.player = player
 
     def sellResource(self, resource, quantity):
+        """Sells resource
+
+        Args:
+            resource (str): Resources string name
+            quantity (int): The quantity to sell
+
+        """    
         item = Items()
         player = self.player
         resourceCost = item.getWorth(resource)
@@ -25,9 +32,28 @@ class Shop:
         print(f"{bcolors.OKGREEN}Sold {resource} for ${resourceCost * quantity}!{bcolors.ENDC}")
 
     def calculateWorth(self, block_name, quantity):
+        """Calculates the worth of blocks
+
+        Args:
+            block_name (str): The block name
+            quantity (int): Quantity to sell
+
+        Returns:
+            int: The mathematical result of multiplying the price of the block * quantity
+        """    
         return Items().getWorth(block_name) * quantity
     
     def buyTool(self, tool_name):
+        """Buys a tool
+
+        Args:
+            a (int): _description_
+            b (str): _description_
+            c (bool, optional): _description_. Defaults to True.
+
+        Returns:
+            bool: _description_
+        """    
         player_mineCoins = self.player.minecoins
         player_upgrades = self.player.upgrades
         tool_cost = Items().getItemWorth(tool_name)
@@ -47,5 +73,5 @@ class Shop:
         # Add item to players upgrade
         player_upgrades.append(Items().getItem(tool_name))
 
-        print(self.player.upgrades)
-        time.sleep(3)
+        print(f"{bcolors.OKGREEN}Bought {tool_name} for ${tool_cost}{bcolors.ENDC}\n{bcolors.BOLD}Remaing minecoins ${player_mineCoins}{bcolors.ENDC}")
+        time.sleep(3)       

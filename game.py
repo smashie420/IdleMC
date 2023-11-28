@@ -26,10 +26,12 @@ saveFilename = 'data.json'
 # !!! Possible Feature Addition encrypt the data.json with md5 or some other hashing method 
 # !!! to prevent players from editing their save
 class IdleMC:
+    '''
+    This is the main class of my game, it contains almost every function, from controlling player data to saving the data
+    '''
     def __init__(self):
         self.player = Player()
         
-
     def initilizeShop(self):
         self.shop = Shop(self.player)
 
@@ -47,6 +49,9 @@ class IdleMC:
         return result
 
     def saveData(self):
+        '''
+        Saves ALL data (saves IdleMC as a snapshot)
+        '''
         if not os.path.exists(saveFilename):
             open(saveFilename, 'a').close()
 
@@ -55,6 +60,9 @@ class IdleMC:
         saveFile.write(json.dumps(self, default=vars))
 
     def loadData(self):
+        '''
+        loads ALL data (restores IdleMC data)
+        '''
         if not os.path.exists(saveFilename): # If file doesnt exist then create new one
             saveFile = open(saveFilename,'w', encoding="utf-8") 
             self.player.inventory = IdleMC.blankInventory()
@@ -72,36 +80,24 @@ class IdleMC:
 
 
     def gatherMaterials(self):
+        '''
+        This function will start the gathering loop,
+            This starts a seperate thread (threadedGoMining) which is the one actually doing the decision making in what gets mined
+                THEN IT WILL
+            Check for user input on the main thread, if it matches Q kill the mining thread (threadedGoMining)
+
+        '''
         miner = threadedGoMining(self.player)
         thread = threading.Thread(target=miner.start, args=())
 
-        print(f"{bcolors.WARNING}!!! AT ANYTIME PRESS 'q' to stop mining !!!{bcolors.ENDC}")
-        time.sleep(2)
         os.system('cls')
-        thread.start()
+        thread.start() # Start the minming thread
 
         while True:
             event = keyboard.read_event(suppress=True)
             if (event.event_type == keyboard.KEY_DOWN) and event.name == 'q':
                 miner.stop()
                 break
-            #if keyboard.is_pressed('q'):
-            #    miner.stop()
-            #    break
-    '''
-    def sellResource(self, resource):
-        items = Items()
-        resourceCost = items.getWorth(resource)
-
-        # Get Quantity of blocks from players inventory
-        playerHas = self.player.getOnhandBlock(resource)
-
-        # Remove Resource From Inventory
-        self.player.removeBlockFromInventory(resource, playerHas)
-
-        # Add Money
-        self.player.addMineCoins(resourceCost * playerHas) 
-    '''
 
 def print_miner(frame):
         if frame == 0:
@@ -164,9 +160,10 @@ class threadedGoMining:
         self.resourcesGathered = IdleMC.blankInventory() # Returns a blank slate of blocks
         frame = 0
         while not self._stop.is_set():
-            if frame > 1:
-                frame = 0
             os.system('cls')
+
+            if frame > 1: # This is for the little animation of steve mining
+                frame = 0
             print_miner(frame)
 
             print(f"{bcolors.WARNING}!!! AT ANYTIME PRESS 'q' to stop mining !!!{bcolors.ENDC}")
@@ -179,12 +176,11 @@ class threadedGoMining:
             # This is used to print every gathered
             for resources in self.resourcesGathered:
                 if resources['name'] == randomResourceGathered: # To have colored text
-
                     print(f"{bcolors.BOLD} {resources['name']} gathered x{resources['quantity']} {bcolors.ENDC}")
                 else:
                     print(f"{resources['name']} gathered x{resources['quantity']}")
-                
-            if len(self.player.upgrades) > 0:
+
+            if len(self.player.upgrades) > 0: # Check if player has any upgrades
                 # Gets the best tool and uses that miningSpeed * playersMining Speed
                 time.sleep(self.player.miningSpeed * self.player.upgrades[len(self.player.upgrades)-1]['miningSpeed'])
             else:

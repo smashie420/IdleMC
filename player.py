@@ -15,16 +15,36 @@ class Player:
         self.lastLogin = 0
 
     def getMineCoins(self):
+        """Get players minecoins
+
+        Returns:
+            int: Players minecoins
+        """    
         return self.minecoins
     def setMineCoins(self,amount):
+        """Sets the users minecoins
+
+        Args:
+            amount (int): Amount to alter players minecoins
+        """    
         if type(amount) != int:
             raise ValueError
         self.minecoins = amount
     def addMineCoins(self, amount):
+        """Appends players minecoins
+
+        Args:
+            amount (int): Amount to append
+        """    
         if type(amount) != int:
             raise ValueError
         self.minecoins += amount
     def subtractMineCoins(self, amount):
+        """Subtracts minecoins from player 
+
+        Args:
+            amount (int): Amount to subtract
+        """    
         if type(amount) != int:
             raise ValueError
         self.minecoins -= amount
@@ -33,10 +53,7 @@ class Player:
             Appends an array of items (blocks) into the players inventory
 
         Args:
-            item (array): 
-            
-        Returns:
-            void: returns nothing    
+            item (array): array should look like the blank inventory format
         '''
         for i in range(0,len(self.inventory)):
             if item[i]['name'] == self.inventory[i]['name']:
@@ -46,6 +63,11 @@ class Player:
         #print(f'player.py:\n        AFTER Self Inventory: {self.inventory}')
 
     def getInventory(self):
+        """Returns the players inventory (array)
+
+        Returns:
+            array: Array of the players inventory
+        """    
         return self.inventory
     
     def removeBlockFromInventory(self, block_name, quantity=1):
@@ -84,7 +106,7 @@ class Player:
         Checks if player already has an upgrade by searching by its name
 
         Returns:
-            bool
+            bool: True/False
         '''
 
         for i in range(0,len(self.upgrades)):
