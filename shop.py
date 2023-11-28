@@ -47,12 +47,7 @@ class Shop:
         """Buys a tool
 
         Args:
-            a (int): _description_
-            b (str): _description_
-            c (bool, optional): _description_. Defaults to True.
-
-        Returns:
-            bool: _description_
+            tool_name (str): Tools name
         """    
         player_mineCoins = self.player.minecoins
         player_upgrades = self.player.upgrades
